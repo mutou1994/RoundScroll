@@ -108,9 +108,10 @@ public class RoundLoopLayout : MonoBehaviour {
         }
         else
         {
-            float rad = Mathf.Atan(pos.y / pos.x);
+            float rad = Mathf.Atan2(pos.y, pos.x);
             angle = Mathf.Rad2Deg * rad;
-            if(angle < 0)
+            //因为Atan2得出的角度在不同象限会相同，这里根据y轴的正负情况 把角度限定在0 - 360度之间
+            if (angle < 0)
             {
                 angle += 180;
             }
@@ -249,7 +250,7 @@ public class RoundLoopLayout : MonoBehaviour {
                 topRealIndex++;
                 int wrapIndex = count - 1;
                 SetChildPosition(wrapIndex);
-                item.transform.SetAsLastSibling();
+                //item.transform.SetAsLastSibling();
                 UpdateItemData(wrapIndex);
                 have = true;
             }else
@@ -301,7 +302,7 @@ public class RoundLoopLayout : MonoBehaviour {
                 topRealIndex--;
                 int wrapIndex = 0;
                 SetChildPosition(wrapIndex);
-                item.transform.SetAsFirstSibling();
+                //item.transform.SetAsFirstSibling();
                 UpdateItemData(wrapIndex);
                 have = true;
             }
